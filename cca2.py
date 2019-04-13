@@ -7,8 +7,7 @@ import localization
 # this gets all the connected regions and groups them together
 
 label_image = measure.label(localization.binary_car_image)
-
-# getting the maximum width, height and minimum width and height that a license plate can be
+# getting the maximum width, height and minimum width and height that a license plate can be according to the size of image
 plate_dimensions = (0.08*label_image.shape[0], 0.2*label_image.shape[0], 0.15*label_image.shape[1], 0.4*label_image.shape[1])
 min_height, max_height, min_width, max_width = plate_dimensions
 plate_objects_cordinates = []
@@ -19,7 +18,7 @@ ax1.imshow(localization.gray_car_image, cmap="gray");
 # regionprops creates a list of properties of all the labelled regions
 for region in regionprops(label_image):
     if region.area < 50:
-        #if the region is so small then it's likely not a license plate
+        #if the region is so small then it's likely not a license plate, skip to next iteration
         continue
 
     # the bounding box coordinates

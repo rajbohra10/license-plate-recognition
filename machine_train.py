@@ -13,13 +13,13 @@ letters = [
         ]
 
 def read_training_data(training_directory):
-    image_data = []
-    target_data = []
+    image_data = [] # image data contains 1D array data for each training image for a letter
+    target_data = [] # the letter for which image_data contains the 1D array
     for each_letter in letters:
         for each in range(10):
             image_path = os.path.join(training_directory, each_letter, each_letter + '_' + str(each) + '.jpg')
             # read each image of each character
-            img_details = imread(image_path, as_grey=True)
+            img_details = imread(image_path, as_gray=True)
             # converts each character image to binary image
             binary_image = img_details < threshold_otsu(img_details)
             # the 2D array of each image is flattened because the machine learning
@@ -41,17 +41,15 @@ def cross_validation(model, num_of_fold, train_data, train_label):
     # and the remaining 3/4 for the training
     accuracy_result = cross_val_score(model, train_data, train_label,
                                       cv=num_of_fold)
-    print("Cross Validation Result for ", str(num_of_fold), " -fold")
+    print"Cross Validation Result for ", str(num_of_fold), " fold"
 
-    print(accuracy_result * 100)
+    print accuracy_result * 100
 
-
-current_dir = os.path.dirname(os.path.realpath(__file__))
-
+# path of this file
+current_dir = os.path.dirname(os.path.realpath(__file__)) 
 training_dataset_dir = os.path.join(current_dir, 'train')
 
 image_data, target_data = read_training_data(training_dataset_dir)
-
 # the kernel can be 'linear', 'poly' or 'rbf'
 # the probability was set to True so as to show
 # how sure the model is of it's prediction
@@ -69,3 +67,5 @@ save_directory = os.path.join(current_dir, 'models/svc/')
 if not os.path.exists(save_directory):
     os.makedirs(save_directory)
 joblib.dump(svc_model, save_directory+'/svc.pkl')
+
+# pkl file is, in fact, a serialized pickle file, which means it has been dumped using Python's pickle module.
