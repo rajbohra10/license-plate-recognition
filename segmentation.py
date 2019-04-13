@@ -8,27 +8,22 @@ from Tkinter import *
 from __main__ import filepath
 import cca2
 
-root = Tk()
-root.title("Number Plate Index")
 # on the image I'm using, the headlamps were categorized as a license plate
 # because their shapes were similar
 # for now I'll just use the plate_like_objects[2] since I know that's the
 # license plate. We'll fix this later
 
 # The invert was done so as to convert the black pixel to white pixel and vice versa4
-index = 0
+intIndex = int(cca2.index)
+
 print(len(cca2.plate_like_objects))
-if(len(cca2.plate_like_objects)>1):
-	root.mainloop()
-else:
-	index = 0
 	
-license_plate = np.invert(cca2.plate_like_objects[index])
+license_plate = np.invert(cca2.plate_like_objects[intIndex])
 	
 labelled_plate = measure.label(license_plate)
 
-#fig, ax1 = plt.subplots(1)
-#ax1.imshow(license_plate, cmap="gray")
+fig, ax1 = plt.subplots(1)
+ax1.imshow(license_plate, cmap="gray")
 # the next two lines is based on the assumptions that the width of
 # a license plate should be between 5% and 15% of the license plate,
 # and height should be between 35% and 60%
@@ -50,7 +45,7 @@ for regions in regionprops(labelled_plate):
         # draw a red bordered rectangle over the character.
         rect_border = patches.Rectangle((x0, y0), x1 - x0, y1 - y0, edgecolor="red",
                                        linewidth=2, fill=False)
-        #ax1.add_patch(rect_border)
+        ax1.add_patch(rect_border)
 
         # resize the characters to 20X20 and then append each character into the characters list
         resized_char = resize(roi, (20, 20))
@@ -59,4 +54,4 @@ for regions in regionprops(labelled_plate):
         # this is just to keep track of the arrangement of the characters
         column_list.append(x0)
 
-#plt.show()
+plt.show()

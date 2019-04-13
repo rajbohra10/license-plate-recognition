@@ -28,11 +28,22 @@ def importFile():
 	
 	
 def runPrediction():
+	window.destroy()
 	import prediction
+
+def showResult(rightplate_string):
+	root = Tk()
+	root.title("Result")
+	print"final result"+rightplate_string
+	var = StringVar()
+	label = Label( root, textvariable=var, relief=RAISED )
+	label.config(font=("Courier", 44))
+	var.set(rightplate_string)
+	label.pack()
+	root.mainloop()
 	
-	
-button = Button(window, text='START', width=25, command=runPrediction)	
-button.pack(anchor=E)
+#button = Button(window, text='START', width=25, command=runPrediction)	
+#button.pack(anchor=E)
 
 frame=Frame(window,width=500,height=500)
 frame.pack(anchor=CENTER)

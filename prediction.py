@@ -1,7 +1,8 @@
 import os
-from __main__ import filepath
+from __main__ import filepath, showResult
 import segmentation
 from sklearn.externals import joblib
+
 
 # load the model
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -34,3 +35,4 @@ for each in segmentation.column_list:
     rightplate_string += plate_string[column_list_copy.index(each)]
 
 print(rightplate_string)
+showResult(rightplate_string)

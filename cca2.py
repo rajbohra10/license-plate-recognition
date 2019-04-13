@@ -3,17 +3,25 @@ from skimage.measure import regionprops
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from __main__ import filepath
+from Tkinter import *
 import localization
 
-# this gets all the connected regions and groups them together
+def submitIndex():
+	global index
+	index = E1.get()
+	print(index)
+	root.destroy()
+	
+index = 0
 
+
+# this gets all the connected regions and groups them together
 label_image = measure.label(localization.binary_car_image)
 # getting the maximum width, height and minimum width and height that a license plate can be according to the size of image
 plate_dimensions = (0.08*label_image.shape[0], 0.2*label_image.shape[0], 0.15*label_image.shape[1], 0.4*label_image.shape[1])
 min_height, max_height, min_width, max_width = plate_dimensions
 plate_objects_cordinates = []
 plate_like_objects = []
-plt.ion()
 fig, (ax1) = plt.subplots(1)
 ax1.imshow(localization.gray_car_image, cmap="gray");
 
@@ -37,4 +45,19 @@ for region in regionprops(label_image):
         ax1.add_patch(rectBorder)
     # let's draw a red rectangle over those regions
 
+if(len(plate_like_objects)>1):
+	root = Tk()
+	root.title("Number plate index")
+	L1 = Label(root, text="Number plate index")
+	L1.pack( side = LEFT)
+	E1 = Entry(root, bd =5)
+	E1.pack(side = RIGHT)
+	B1 = Button(root, text="OK", command=submitIndex)
+	B1.pack(side = BOTTOM)
+	#root.mainloop()
+else:	
+	global index
+	index = 0
 plt.show()
+
+
