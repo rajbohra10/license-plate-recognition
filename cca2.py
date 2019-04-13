@@ -2,6 +2,7 @@ from skimage import measure
 from skimage.measure import regionprops
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from __main__ import filepath
 import localization
 
 # this gets all the connected regions and groups them together
@@ -12,6 +13,7 @@ plate_dimensions = (0.08*label_image.shape[0], 0.2*label_image.shape[0], 0.15*la
 min_height, max_height, min_width, max_width = plate_dimensions
 plate_objects_cordinates = []
 plate_like_objects = []
+plt.ion()
 fig, (ax1) = plt.subplots(1)
 ax1.imshow(localization.gray_car_image, cmap="gray");
 

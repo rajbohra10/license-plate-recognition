@@ -1,4 +1,5 @@
 import os
+from __main__ import filepath
 import segmentation
 from sklearn.externals import joblib
 
