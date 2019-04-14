@@ -1,3 +1,4 @@
+# Connected component analysis
 from skimage import measure
 from skimage.measure import regionprops
 import matplotlib.pyplot as plt
@@ -49,11 +50,11 @@ if(len(plate_like_objects)>1):
 	root = Tk()
 	root.title("Number plate index")
 	L1 = Label(root, text="Number plate index")
-	L1.pack( side = LEFT)
+	L1.pack(anchor=N)
 	E1 = Entry(root, bd =5)
-	E1.pack(side = RIGHT)
+	E1.pack(anchor=CENTER)
 	B1 = Button(root, text="OK", command=submitIndex)
-	B1.pack(side = BOTTOM)
+	B1.pack(anchor=S)
 	#root.mainloop()
 else:	
 	global index
