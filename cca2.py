@@ -18,8 +18,9 @@ index = 0
 
 # this gets all the connected regions and groups them together
 label_image = measure.label(localization.binary_car_image)
+print(label_image.shape)
 # getting the maximum width, height and minimum width and height that a license plate can be according to the size of image
-plate_dimensions = (0.08*label_image.shape[0], 0.2*label_image.shape[0], 0.15*label_image.shape[1], 0.4*label_image.shape[1])
+plate_dimensions = (0.05*label_image.shape[0], 0.2*label_image.shape[0], 0.15*label_image.shape[1], 0.4*label_image.shape[1])
 min_height, max_height, min_width, max_width = plate_dimensions
 plate_objects_cordinates = []
 plate_like_objects = []

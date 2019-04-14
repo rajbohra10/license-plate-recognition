@@ -74,12 +74,13 @@ def showResult(rightplate_string):
 	var = StringVar()
 	label = Label( root, textvariable=var, relief=RAISED )
 	label.config(font=("Courier", 44))
+	print(rightplate_string)
 	try:
-		rightplace_string
-	except:
+		print(rightplate_string)
+	except NameError:
 		var.set("Could not find the number plate")
 	else:
-		if rightplace_string!="":
+		if rightplate_string!="":
 			var.set(rightplate_string)
 		else:
 			var.set("Could not find the number plate")
