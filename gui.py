@@ -66,6 +66,13 @@ def importFile():
 def runPrediction():
 	window.destroy()
 	import prediction
+	
+def storeResult(rightplate_string):
+	fo = open("results.txt", "a")
+	fo.seek(0, 2)
+	fo.write(filename + " - " + rightplate_string )
+	fo.write("\n")
+	fo.close()
 
 def showResult(rightplate_string):
 	global root
@@ -74,7 +81,7 @@ def showResult(rightplate_string):
 	var = StringVar()
 	label = Label( root, textvariable=var, relief=RAISED )
 	label.config(font=("Courier", 44))
-	print(rightplate_string)
+	#print(rightplate_string)
 	try:
 		print(rightplate_string)
 	except NameError:
@@ -84,6 +91,7 @@ def showResult(rightplate_string):
 			var.set(rightplate_string)
 		else:
 			var.set("Could not find the number plate")
+		storeResult(rightplate_string)
 		
 	label.pack()
 	#newImageButton = Button(root, text="Try Another Image", command=newImage)

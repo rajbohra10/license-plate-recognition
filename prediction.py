@@ -16,13 +16,13 @@ for each_character in segmentation.characters:
     result = model.predict(each_character)
     classification_result.append(result)
 
-print(classification_result)
+#print(classification_result)
 
 plate_string = ''
 for eachPredict in classification_result:
     plate_string += eachPredict[0]
 
-print(plate_string)
+#print(plate_string)
 
 # it's possible the characters are wrongly arranged
 # since that's a possibility, the column_list will be
@@ -34,5 +34,5 @@ rightplate_string = ''
 for each in segmentation.column_list:
     rightplate_string += plate_string[column_list_copy.index(each)]
 
-print(rightplate_string)
+#print(rightplate_string)
 showResult(rightplate_string)
